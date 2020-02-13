@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import { connect } from 'react-redux';
+import { checkToken } from 'Core/store/actions/auth.actions';
+import { Router, Route, Switch } from 'react-router-dom';
+import history from './history';
+import LandingLayout from 'Landing/containers/LandingLayout';
+import GameMakerLayout from 'GameMaker/containers/GameMakerLayout';
+import { ThemeProvider } from 'styled-components';
+import { theme } from 'styles/theme';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ThemeProvider theme={theme}>
+        <Router history={history}>
+          <Switch>
+            <Route path="/dashboard" component={GameMakerLayout}></Route>
+            <Route path="/" component={LandingLayout}></Route>
+          </Switch>
+        </Router>
+      </ThemeProvider>
+    </>
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.authenticated,
+    loading: state.auth.loading
+  };
+};
+
+export default connect(mapStateToProps, { checkToken })(App);

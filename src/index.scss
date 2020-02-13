@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'c64';
+  src: local('c64'),
+  // url('./fonts/Commodore Angled v1.2.ttf'),
+  // url('./fonts/Commodore Rounded v1.2.ttf'),
+  url('./fonts/Commodore-64-v6.3.TTF');
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +13,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  padding: 0;
 }
 
 code {

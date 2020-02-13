@@ -1,19 +1,5 @@
-import { ActionCreator, Dispatch } from 'redux';
-import {
-  AuthActionTypes,
-  SignUp,
-  UserCredentials,
-  SignUpSuccess,
-  AuthenticationProfile,
-  SignUpError,
-  Login,
-  LoginSuccess,
-  LoginError,
-  ForgotPassword,
-  AuthClear,
-  Logout,
-  RegisterBusinessCredentials
-} from 'Core/store/types/auth.types';
+import {} from 'redux';
+import * as AuthActionTypes from 'Core/store/types/auth.types';
 import { instance } from 'Utils/axios.instance';
 import { alertError } from 'Core/store/actions/alert.actions';
 import {
@@ -23,9 +9,7 @@ import {
 } from 'Utils/jwt-helper.service';
 import history from '../../../history';
 
-export const signUp: ActionCreator<any> = (
-  credentials: RegisterBusinessCredentials
-) => async (dispatch: Dispatch) => {
+export const signUp = credentials => async dispatch => {
   dispatch({
     type: AuthActionTypes.SIGNUP,
     payload: { credentials }
@@ -39,17 +23,12 @@ export const signUp: ActionCreator<any> = (
   }
 };
 
-export const signUpSuccess: ActionCreator<SignUpSuccess> = (
-  profile: AuthenticationProfile
-) => ({
+export const signUpSuccess = profile => ({
   type: AuthActionTypes.SIGNUP_SUCCESS,
   payload: { profile }
 });
 
-export const signUpError: ActionCreator<any> = (message: string) => (
-  dispatch: Dispatch,
-  getState: any
-) => {
+export const signUpError = message => (dispatch, getState) => {
   dispatch({
     type: AuthActionTypes.SIGNUP_ERROR,
     payload: { message }
@@ -58,9 +37,7 @@ export const signUpError: ActionCreator<any> = (message: string) => (
   dispatch(alertError(errorMessage));
 };
 
-export const login: ActionCreator<any> = (
-  credentials: UserCredentials
-) => async (dispatch: Dispatch) => {
+export const login = credentials => async dispatch => {
   dispatch({ type: AuthActionTypes.LOGIN });
   try {
     const response = await instance().post('/auth/token', credentials);
@@ -71,9 +48,7 @@ export const login: ActionCreator<any> = (
   }
 };
 
-export const loginSuccess: ActionCreator<any> = (
-  profile: AuthenticationProfile
-) => async (dispatch: Dispatch, getState: any) => {
+export const loginSuccess = profile => async (dispatch, getState) => {
   dispatch({
     type: AuthActionTypes.LOGIN_SUCCESS,
     payload: profile
@@ -83,10 +58,7 @@ export const loginSuccess: ActionCreator<any> = (
   history.push('/dashboard');
 };
 
-export const loginError: ActionCreator<any> = (message: string) => async (
-  dispatch: Dispatch,
-  getState: any
-) => {
+export const loginError = message => async (dispatch, getState) => {
   dispatch({
     type: AuthActionTypes.LOGIN_ERROR,
     payload: { message }
@@ -95,25 +67,20 @@ export const loginError: ActionCreator<any> = (message: string) => async (
   dispatch(alertError(errorMessage));
 };
 
-export const logout: ActionCreator<Logout> = () => ({
+export const logout = () => ({
   type: AuthActionTypes.LOGOUT
 });
 
-export const authClear: ActionCreator<AuthClear> = () => ({
+export const authClear = () => ({
   type: AuthActionTypes.CLEAR
 });
 
-export const forgotPassword: ActionCreator<ForgotPassword> = (
-  email: string
-) => ({
+export const forgotPassword = email => ({
   type: AuthActionTypes.FORGOT,
   payload: { email }
 });
 
-export const checkToken: ActionCreator<any> = () => async (
-  dispatch: Dispatch,
-  getState: any
-) => {
+export const checkToken = () => async (dispatch, getState) => {
   const storedToken = isLoggedIn();
   const decoded = getStorageItem('token');
   if (storedToken) {
@@ -123,14 +90,3 @@ export const checkToken: ActionCreator<any> = () => async (
     });
   }
 };
-
-export type AuthActions =
-  | SignUp
-  | SignUpSuccess
-  | SignUpError
-  | Login
-  | LoginError
-  | LoginSuccess
-  | Logout
-  | AuthClear
-  | ForgotPassword;
