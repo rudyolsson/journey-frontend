@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const Label = styled.label`
+export const StyledLabel = styled.label`
   color: ${props => props.theme.brightGreen};
   position: absolute;
   top: 0;
@@ -9,7 +8,3 @@ const Label = styled.label`
   transition: 0.2s;
   font-size: 1rem;
 `;
-
-export default function StyledLabel() {
-  return <Label />;
-}

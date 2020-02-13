@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const TextInput = styled.input`
+export const StyledInput = styled.input`
   border: 1px solid ${props => props.theme.brightGreen};
   background-color: inherit;
   color: ${props => props.theme.brightGreen};
@@ -49,7 +48,3 @@ const TextInput = styled.input`
     }
   }
 `;
-
-export default function StyledInput() {
-  return <TextInput />;
-}

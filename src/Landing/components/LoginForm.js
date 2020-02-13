@@ -1,8 +1,8 @@
 import React from 'react';
 import useForm from 'Core/hooks/useForm';
-import StyledFormGroup from './StyledFormGroup';
-import StyledInput from './StyledInput';
-import StyledLabel from './StyledLabel';
+import { StyledFormGroup } from './StyledFormGroup';
+import { StyledInput } from './StyledInput';
+import { StyledLabel } from './StyledLabel';
 
 export default function LoginForm() {
   const { values, handleChange, handleSubmit } = useForm({
