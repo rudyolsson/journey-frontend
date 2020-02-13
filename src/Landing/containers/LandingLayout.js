@@ -51,7 +51,7 @@ function LandingLayout(props) {
             <Route path="/login" exact>
               <LoginForm onSubmit={values => props.login(values)} />
             </Route>
-            <Route path="/register" exact>
+            <Route path="/signup" exact>
               <SignupForm onSubmit={values => props.signUp(values)} />
             </Route>
           </Switch>

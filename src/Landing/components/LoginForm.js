@@ -3,18 +3,18 @@ import useForm from 'Core/hooks/useForm';
 import { StyledFormGroup } from './StyledFormGroup';
 import { StyledInput } from './StyledInput';
 import { StyledLabel } from './StyledLabel';
+import Button from 'Core/components/Button';
+import { Link } from 'react-router-dom';
+import { theme } from 'styles/theme';
+import styled from 'styled-components';
 
 export default function LoginForm() {
   const { values, handleChange, handleSubmit } = useForm({
     initialValues: {
-      name: '',
       email: '',
-      meal: '',
-      isGoing: false
+      password: ''
     },
-    onSubmit(values, errors) {
-      alert(JSON.stringify({ values, errors }, null, 2));
-    },
+    onSubmit(values, errors) {},
     validate(values) {
       const errors = {};
       if (values.name === '') {
@@ -51,6 +51,13 @@ export default function LoginForm() {
         />
         <StyledLabel htmlFor="password">password</StyledLabel>
       </StyledFormGroup>
+      <Button type="submit" backgroundColor={theme.brightGreen}>
+        Login
+      </Button>
+      Don't have an account?
+      <Button color={theme.pink}>
+        <Link to="/signup">Sign up Here</Link>
+      </Button>
     </form>
   );
 }
